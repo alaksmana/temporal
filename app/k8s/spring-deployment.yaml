@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: greeting-springboot
+  labels:
+    app: workflow-initiator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: workflow-initiator
+  template:
+    metadata:
+      labels:
+        app: workflow-initiator
+    spec:
+      containers:
+      - name: temporal-greeting-springboot
+        image: temporal-greeting-springboot:latest
+        imagePullPolicy: Never
+        ports:
+          - containerPort: 8080

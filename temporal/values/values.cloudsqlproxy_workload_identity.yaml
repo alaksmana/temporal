@@ -1,0 +1,14 @@
+server:
+  sidecarContainers:
+    - name: cloud-sql-proxy
+      image: gcr.io/cloudsql-docker/gce-proxy:1.17
+      command:
+        - "/cloud_sql_proxy"
+        - "-instances=prefab-atlas-338815:asia-southeast2:temporal-test2=tcp:5432"
+      securityContext:
+        runAsNonRoot: true
+
+  workloadIdentity:
+    enabled: true
+    serviceAccountName: temporal
+    googleServiceAccount: temporal@prefab-atlas-338815.iam.gserviceaccount.com

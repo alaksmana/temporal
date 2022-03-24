@@ -1,0 +1,22 @@
+workload identity
+
+gcloud iam service-accounts add-iam-policy-binding \
+--role="roles/iam.workloadIdentityUser" \
+--member="serviceAccount:prefab-atlas-338815.svc.id.goog[default/temporal]" \
+temporal@prefab-atlas-338815.iam.gserviceaccount.com
+
+
+kubectl describe serviceaccount \
+    --namespace default temporal
+
+
+gcloud container clusters describe temporal-cluster --region=asia-southeast2 \
+    --format="value(workloadIdentityConfig.workloadPool)"
+
+gcloud container node-pools describe default-pool \
+    --cluster=temporal-cluster \
+    --region=asia-southeast2 \
+    --format="value(config.workloadMetadataConfig.mode)"
+
+gcloud iam service-accounts get-iam-policy \
+    temporal@prefab-atlas-338815.iam.gserviceaccount.com

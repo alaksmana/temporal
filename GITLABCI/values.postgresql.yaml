@@ -1,0 +1,43 @@
+server:
+  config:
+    persistence:
+      default:
+        driver: "sql"
+
+        sql:
+          driver: "postgres"
+          host: 127.0.0.1
+          port: 5432
+          database: temporal
+          user: antares
+          password: antares
+          maxConns: 20
+          maxConnLifetime: "1h"
+
+      visibility:
+        driver: "sql"
+
+        sql:
+          driver: "postgres"
+          host: 127.0.0.1
+          port: 5432
+          database: temporal_visibility
+          user: antares
+          password: antares
+          maxConns: 20
+          maxConnLifetime: "1h"
+
+cassandra:
+  enabled: false
+
+mysql:
+  enabled: false
+
+postgresql:
+  enabled: true
+
+schema:
+  setup:
+    enabled: false
+  update:
+    enabled: false
